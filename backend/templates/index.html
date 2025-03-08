@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAL-News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/" class="logo-link"> <!-- Make logo a hyperlink to homepage -->
+                <img src="{{ url_for('static', filename='news_logo.jpg') }}" alt="DAL-News Logo" class="logo">
+            </a>
+            <h1><a href="/" class="logo-link">-News</a></h1>
+        </div>
+    </header>
+    <div id="categories">
+        <button onclick="loadCategory('Top')">Top</button>
+        <button onclick="loadCategory('Sports')">Sports</button>
+        <button onclick="loadCategory('World')">World</button>
+        <button onclick="loadCategory('States')">States</button>
+        <button onclick="loadKarnatakaNews()">Karnataka</button>
+        <button onclick="loadBengaluruNews()">Bengaluru</button>
+        <button onclick="loadCategory('Entertainment')">Entertainment</button>
+    </div>
+    <div id="search">
+        <input type="text" id="searchQuery" placeholder="Search articles...">
+        <button onclick="searchArticles()">Search</button>
+    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="news-articles">
+        {% if articles %}
+            {% for article in articles %}
+                <div class="article-card">
+                    <h2><a href="/article_page/{{ article.title | urlencode }}">{{ article.title }}</a></h2>
+                    <a href="/article_page/{{ article.title | urlencode }}">
+                        <img src="{{ article.image_url }}" alt="{{ article.title }}" class="article-image">
+                    </a>    
+                    <p>{{ article.summary[:100] }}...</p>
+                    <p><strong>Published:</strong> {{ article.published | default('Not available', true) }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No articles available.</p>
+        {% endif %}
+    </div>
+    <div class="scroll-down-indicator">↓</div>
+    <div class="footer-banner">
+        <span class="banner-text">© DAL-News 2025. All rights reserved. Design by Team DALL-Eminators.</span>
+        <span class="back-to-top">↑</span>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Map Enter key to trigger search button
+        document.getElementById('searchQuery').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission if any
+                searchArticles(); // Trigger the search function
+            }
+        });
+
+        // Show/hide footer banner when scrolled to the bottom
+        window.addEventListener('scroll', function() {
+            const footerBanner = document.querySelector('.footer-banner');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (documentHeight - (scrollTop + windowHeight) < 100) { // Show when within 100px of bottom
+                footerBanner.classList.add('visible');
+            } else {
+                footerBanner.classList.remove('visible');
+            }
+        });
+
+        // Back-to-top functionality
+        document.querySelector('.back-to-top').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        });
+    </script>
+</body>
+</html>

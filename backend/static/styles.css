@@ -1,0 +1,384 @@
+/* General RESET Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Changed to match BizNews sans-serif style */
+    background-color: #1e1e1e; /* Dark background like BizNews */
+    color: #ffffff; /* White text for contrast */
+    line-height: 1.6;
+    padding-bottom: 0; /* Reset padding since banner is now scroll-based */
+}
+
+/* Header */
+header {
+    background: #2b2b2b; /* Darker, solid background for header */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #444444;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth like BizNews */
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Logo Image */
+.logo {
+    height: 50px; /* Adjust as needed */
+    width: auto;
+    border-radius: 8px;
+}
+
+/* Header Title */
+header h1 {
+    font-family: 'Roboto', sans-serif; /* Changed to Roboto for consistency with BizNews */
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Style "DAL" part of DAL-NEWS in HEX #f4804d (lighter orange) */
+header h1 a.logo-link::before {
+    content: "DAL";
+    color: #f4804d; /* Lighter orange for "DAL" */
+    margin-right: 5px; /* Spacing between "DAL" and "-NEWS" */
+    transition: color 0.3s ease; /* Add transition for smooth color change on hover */
+}
+
+header h1 a.logo-link {
+    text-decoration: none;
+    color: #ffffff; /* "-NEWS" part in white */
+    transition: opacity 0.3s ease, color 0.3s ease; /* Added color transition for hover */
+}
+
+header h1 a.logo-link:hover {
+    opacity: 0.8;
+}
+
+header h1 a.logo-link:hover::before {
+    color: #f4804d; /* Change "DAL" to lighter orange on hover */
+}
+
+header h1 a.logo-link:hover {
+    color: #f4804d; /* Change "-NEWS" to lighter orange on hover */
+}
+
+/* Categories Section */
+#categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+#categories button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f4804d; /* Lighter orange */
+    color: #1e1e1e; /* Dark text for contrast */
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#categories button:hover {
+    background-color: #e96a47; /* Lighter darker shade of orange for hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 128, 77, 0.5); /* Updated shadow to use lighter orange */
+}
+
+/* Search Section */
+#search {
+    text-align: center;
+    margin: 25px 0;
+}
+
+#search input {
+    padding: 12px;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 320px;
+    margin-right: 10px;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#search input::placeholder {
+    color: #888888;
+}
+
+#search input:focus {
+    border-color: #f4804d; /* Lighter orange */
+    outline: none;
+}
+
+#search button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f4804d; /* Lighter orange */
+    color: #1e1e1e; /* Dark text for contrast */
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search button:hover {
+    background-color: #e96a47; /* Lighter darker shade of orange for hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 128, 77, 0.5); /* Updated shadow to use lighter orange */
+}
+
+/* Loading Indicator */
+#loading {
+    text-align: center;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 25px 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* News Articles Section */
+#news-articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    perspective: 1000px;
+}
+
+.article-card {
+    background-color: #2b2b2b; /* Dark background for cards */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer shadow like BizNews */
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(244, 128, 77, 0.3); /* Lighter orange */
+}
+
+.article-card img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0; /* Rounded top corners only */
+}
+
+.article-card:hover img {
+    transform: scale(1.05);
+}
+
+.article-card h2 {
+    font-size: 22px;
+    margin: 15px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.article-card h2 a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.article-card h2 a:hover {
+    color: #f4804d; /* Lighter orange */
+}
+
+.article-card p {
+    font-size: 15px;
+    margin: 15px;
+    color: #b3b3b3;
+}
+
+/* Article Page Specific */
+.article-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.article-content {
+    flex: 3;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.article-content h2 {
+    font-size: 28px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.article-image {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.article-content p {
+    font-size: 16px;
+    color: #b3b3b3;
+    margin: 15px 0;
+}
+
+.article-content strong {
+    color: #ffffff;
+}
+
+.article-content a {
+    color: #f4804d; /* Lighter orange */
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    color: #e96a47; /* Lighter darker shade of orange for hover */
+}
+
+.article-content select {
+    padding: 10px;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    background-color: #333333;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.related-articles {
+    flex: 1;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.related-articles h3 {
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.related-article-card {
+    margin-bottom: 20px;
+}
+
+.related-article-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.related-article-card h4 {
+    font-size: 16px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+}
+
+.related-article-card h4 a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.related-article-card h4 a:hover {
+    color: #f4804d; /* Lighter orange */
+}
+
+/* Scroll Down Feature */
+@keyframes scrollDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(20px); }
+}
+
+.scroll-down-indicator {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 24px;
+    color: #f4804d; /* Lighter orange */
+    animation: scrollDown 1.5s infinite;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Footer Banner Styles */
+.footer-banner {
+    position: fixed; /* Fixed at the bottom of the viewport */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Match the height from the image */
+    background-color: #000000; /* Black background like the image */
+    color: #ffffff; /* White text for contrast */
+    text-align: center;
+    line-height: 50px; /* Center text vertically */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 1000; /* Ensure it stays above other content */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition for visibility */
+}
+
+.footer-banner.visible {
+    opacity: 1; /* Visible when scrolled to the bottom */
+}
+
+.footer-banner .banner-text {
+    display: inline-block;
+    margin-right: 20px; /* Space for the back-to-top button */
+}
+
+.footer-banner .back-to-top {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f4804d; /* Lighter orange */
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-banner .back-to-top:hover {
+    color: #e96a47; /* Lighter darker shade of orange for hover */
+}

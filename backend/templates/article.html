@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} - DAL-News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/" class="logo-link"> <!-- Make logo a hyperlink to homepage -->
+                <img src="{{ url_for('static', filename='news_logo.jpg') }}" alt="DAL-News Logo" class="logo">
+            </a>
+            <h1><a href="/" class="logo-link">-News</a></h1>
+        </div>
+    </header>
+    <div id="categories">
+        <button onclick="loadCategoryFromArticle('Top')">Top</button>
+        <button onclick="loadCategoryFromArticle('Sports')">Sports</button>
+        <button onclick="loadCategoryFromArticle('World')">World</button>
+        <button onclick="loadCategoryFromArticle('States')">States</button>
+        <button onclick="loadCategoryFromArticle('Karnataka')">Karnataka</button>
+        <button onclick="loadCategoryFromArticle('Bengaluru')">Bengaluru</button>
+        <button onclick="loadCategoryFromArticle('Entertainment')">Entertainment</button>
+    </div>
+    <div class="article-container">
+        <div class="article-content">
+            <h2>{{ article.title }}</h2>
+            <a href="/article_page/{{ article.title | urlencode }}">
+                <img src="{{ article.image_url }}" alt="{{ article.title }}" class="article-image">
+            </a>
+            <p><strong>Summary:</strong> {{ article.summary }}</p>
+            <p><strong>Published:</strong> {{ article.published | default('Not available', true) }}</p>
+            <p><strong>Source:</strong> <a href="{{ article.link }}" target="_blank">Read more</a></p>
+            <div>
+                <select id="translate-lang" onchange="translateArticle(this.value)">
+                    <option value="" {% if not selected_lang %}selected{% endif %}>Translate</option>
+                    <option value="hi" {% if selected_lang == 'hi' %}selected{% endif %}>Hindi</option>
+                    <option value="mr" {% if selected_lang == 'mr' %}selected{% endif %}>Marathi</option>
+                    <option value="gu" {% if selected_lang == 'gu' %}selected{% endif %}>Gujarati</option>
+                    <option value="bn" {% if selected_lang == 'bn' %}selected{% endif %}>Bengali</option>
+                    <option value="ta" {% if selected_lang == 'ta' %}selected{% endif %}>Tamil</option>
+                    <option value="kn" {% if selected_lang == 'kn' %}selected{% endif %}>Kannada</option>
+                </select>
+            </div>
+        </div>
+        <div class="related-articles">
+            <h3>Related Articles</h3>
+            {% if related_articles %}
+                {% for related in related_articles %}
+                    <div class="related-article-card">
+                        <a href="/article_page/{{ related.title | urlencode }}">
+                            <img src="{{ related.image_url }}" alt="{{ related.title }}">
+                        </a>
+                        <h4><a href="/article_page/{{ related.title | urlencode }}">{{ related.title }}</a></h4>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No related articles found.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div class="footer-banner">
+        <span class="banner-text">© DAL-News 2025. All rights reserved. Design by Team DALL-Eminators.</span>
+        <span class="back-to-top">↑</span>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Show/hide footer banner when scrolled to the bottom
+        window.addEventListener('scroll', function() {
+            const footerBanner = document.querySelector('.footer-banner');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (documentHeight - (scrollTop + windowHeight) < 100) { // Show when within 100px of bottom
+                footerBanner.classList.add('visible');
+            } else {
+                footerBanner.classList.remove('visible');
+            }
+        });
+
+        // Back-to-top functionality
+        document.querySelector('.back-to-top').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        });
+    </script>
+</body>
+</html>
