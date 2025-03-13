@@ -1,19 +1,3 @@
-# from transformers import pipeline
-
-# def summarize_text(text, max_length=200, min_length=100):
-#     if not text or not isinstance(text, str) or text.strip() == "":
-#         return "No content available for summarization."
-#     try:
-#         summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-#         summary = summarizer(text, max_length=max_length, min_length=min_length, do_sample=False)
-#         summary_text = summary[0]['summary_text']
-#         if not summary_text or summary_text.strip() == "":
-#             raise ValueError("Empty summary generated")
-#         return summary_text
-#     except Exception as e:
-#         print(f"Error during summarization: {e}")
-#         return "Summarization failed due to an error."
-
 import os
 from dotenv import load_dotenv
 import requests
